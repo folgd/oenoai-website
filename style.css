@@ -307,10 +307,10 @@ main.app{ min-height: 100vh; }
 }
 :root[data-lang="ja"] .hero h1{
   font-family: var(--serif-jp);
-  font-size: clamp(34px, 5.2vw, 72px);
-  line-height: 1.45;
-  letter-spacing: .04em;
-  max-width: 16ch;
+  font-size: clamp(28px, 4.4vw, 56px);
+  line-height: 1.55;
+  letter-spacing: .06em;
+  max-width: none;
 }
 :root[data-lang="en"] .hero h1{
   font-family: var(--serif-en);
@@ -731,9 +731,13 @@ h2.section-title{
 }
 :root[data-lang="ja"] .contact-intro h1{
   font-family: var(--serif-jp);
-  font-size: clamp(32px, 4vw, 56px);
-  letter-spacing: .05em;
-  line-height: 1.5;
+  font-size: clamp(26px, 3.4vw, 44px);
+  letter-spacing: .04em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+@media (max-width: 720px){
+  :root[data-lang="ja"] .contact-intro h1{ white-space: normal; }
 }
 :root[data-lang="en"] .contact-intro h1{
   font-family: var(--serif-en);
@@ -821,6 +825,9 @@ form.contact .submit.sent{
   margin: 0 auto;
   padding-left: var(--pad-x);
   padding-right: var(--pad-x);
+}
+.company-wrap.company-wrap--body{
+  padding-top: clamp(80px, 10vw, 140px);
 }
 .company-intro{
   display: grid;
@@ -1383,3 +1390,82 @@ footer.site{
   .philosophy-opening{ letter-spacing: .04em; }
   .philosophy-divider{ margin: 64px auto; }
 }
+
+
+/* ============================================================
+ * Company hero band
+ * Full-bleed image backdrop with dark overlay and white text.
+ * Drop images/company-bg.png to fill it — falls back to a tonal
+ * placeholder (dark wine + subtle stripes) when the file is absent.
+ * ============================================================ */
+.company-hero{
+  position: relative;
+  min-height: clamp(420px, 56vh, 640px);
+  padding: clamp(140px, 18vw, 220px) var(--pad-x) clamp(80px, 12vw, 140px);
+  color: var(--color-white);
+  overflow: hidden;
+  isolation: isolate;
+}
+.company-hero-bg{
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.55) 100%),
+    url('images/company-bg.png') center / cover no-repeat,
+    radial-gradient(ellipse at 30% 30%, #3a2a20 0%, #1f1612 55%, #0e0a08 100%);
+  z-index: -1;
+}
+/* Subtle vine-stripe veil so the placeholder reads as designed-empty, not broken */
+.company-hero-bg::after{
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(135deg, rgba(197,160,89,.05) 0 2px, transparent 2px 14px);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.company-hero-inner{
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(40px, 6vw, 100px);
+  align-items: end;
+}
+.company-hero .eyebrow{ color: rgba(255,255,255,.65); }
+.company-hero .eyebrow .num{ color: var(--color-gold); }
+.company-hero .eyebrow::after{ background: rgba(255,255,255,.18); }
+.company-hero .eyebrow-stack{
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 1.1;
+  letter-spacing: .005em;
+  color: var(--color-gold-soft);
+}
+.company-hero h1{
+  font-weight: 400;
+  margin: 0;
+  text-wrap: pretty;
+  white-space: pre-line;  /* honour \n breaks in company.tagline_sub */
+  color: var(--color-white);
+}
+:root[data-lang="ja"] .company-hero h1{
+  font-family: var(--serif-jp);
+  font-size: clamp(22px, 2.2vw, 32px);
+  line-height: 1.85;
+  letter-spacing: .1em;
+}
+:root[data-lang="en"] .company-hero h1{
+  font-family: var(--serif-en);
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 1.4;
+  letter-spacing: .005em;
+}
+
+@media (max-width: 960px){
+  .company-hero-inner{ grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* Also honour the explicit line break in the JA hero catchcopy
+   (the renderer inserts <br>, but pre-line is a safe belt-and-braces) */
+.hero h1{ white-space: pre-line; }

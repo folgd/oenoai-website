@@ -270,8 +270,6 @@
           <div class="eyebrow reveal"><span class="num">04</span> <span data-content-key="ext.contact_eyebrow"></span></div>
           <h1 class="reveal" style="margin-top:24px;" data-content-key="contact.heading"></h1>
           <div class="contact-meta reveal">
-            <span class="label">— <span data-content-key="ext.contact_hours_label"></span></span>
-            <span class="val" data-content-key="ext.contact_hours_val"></span><br/>
             <span class="label">— <span data-content-key="ext.contact_based_label"></span></span>
             <span class="val" data-content-key="ext.contact_based_val"></span>
           </div>
@@ -331,14 +329,19 @@
     <!-- 05 · Company                                                 -->
     <!-- ============================================================ -->
     <div class="page" id="page-company" data-screen-label="05 Company">
-      <div class="company-wrap">
-        <div class="company-intro">
+      <!-- Hero band with backdrop image (drop images/company-bg.png to populate) -->
+      <section class="company-hero">
+        <div class="company-hero-bg" aria-hidden="true"></div>
+        <div class="company-hero-inner">
           <div>
             <div class="eyebrow reveal" style="margin-bottom:32px;"><span class="num">05</span> <span data-content-key="ext.company_eyebrow"></span></div>
             <div class="eyebrow-stack reveal" data-content-key="company.tagline_top"></div>
           </div>
           <h1 class="reveal" data-content-key="company.tagline_sub"></h1>
         </div>
+      </section>
+
+      <div class="company-wrap company-wrap--body">
 
         <div class="info-table reveal">
           <div class="key" data-content-key="company.table.company[0]"></div>

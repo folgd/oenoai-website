@@ -11,14 +11,14 @@ const CONTENT = {
   /* ---------------- 日本語 ---------------- */
   ja: {
     nav: {
-      top: 'Top',
-      philosophy: '理念',
-      products: 'プロダクト',
-      contact: 'コンタクト',
-      company: '会社概要'
+      top: 'TOP',
+      philosophy: 'PHILOSOPHY',
+      products: 'PRODUCTS',
+      contact: 'CONTACT',
+      company: 'COMPANY'
     },
     hero: {
-      catchcopy: '醸造家の知と想いを 然るべき人へ、今。',
+      catchcopy: '醸造家の知と想いを\n然るべき人へ、今。',
       cta_philosophy: '理念を読む →',
       cta_contact: 'お問い合わせ →'
     },
@@ -79,7 +79,7 @@ OenoAIは、その現実を変えるために生まれました。
       ]
     },
     contact: {
-      heading: 'まずは、お声がけください。',
+      heading: 'まずは、ご連絡ください。',
       name: 'お名前',
       company: '会社名',
       email: 'メールアドレス',
@@ -90,7 +90,7 @@ OenoAIは、その現実を変えるために生まれました。
     },
     company: {
       tagline_top: 'Oenology × AI',
-      tagline_sub: '醸造の知と想いを、AIとデータで昇華させる。',
+      tagline_sub: '醸造の知と想いを、\nAIとDATAで昇華させる。',
       table: {
         company: ['会社名', 'OenoAI'],
         representative: ['代表 & CEO', '村上大輔'],
@@ -125,8 +125,6 @@ OenoAIは、その現実を変えるために生まれました。
       contact_eyebrow: 'Contact',
       contact_required: '必須',
       contact_category_placeholder: '選択してください',
-      contact_hours_label: '営業時間',
-      contact_hours_val: 'Mon–Fri · 10:00–18:00 JST',
       contact_based_label: '所在地',
       contact_based_val: 'Tokyo, Japan',
       company_eyebrow: 'Company',
@@ -140,11 +138,11 @@ OenoAIは、その現実を変えるために生まれました。
   /* ---------------- English ---------------- */
   en: {
     nav: {
-      top: 'Top',
-      philosophy: 'Philosophy',
-      products: 'Products',
-      contact: 'Contact',
-      company: 'Company'
+      top: 'TOP',
+      philosophy: 'PHILOSOPHY',
+      products: 'PRODUCTS',
+      contact: 'CONTACT',
+      company: 'COMPANY'
     },
     hero: {
       catchcopy: 'The Oenologist\'s knowledge and passion — to those who seek it, now.',
@@ -254,8 +252,6 @@ The Oenologist's knowledge and passion — to those who seek it, now.`
       contact_eyebrow: 'Contact',
       contact_required: 'Required',
       contact_category_placeholder: 'Please select',
-      contact_hours_label: 'Hours',
-      contact_hours_val: 'Mon–Fri · 10:00–18:00 JST',
       contact_based_label: 'Based in',
       contact_based_val: 'Tokyo, Japan',
       company_eyebrow: 'Company',
