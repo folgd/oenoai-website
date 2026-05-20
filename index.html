@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ja" data-lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OenoAI</title>
+
+  <!-- Web fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <!-- Project files -->
+  <link rel="stylesheet" href="style.css">
+  <script src="content.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <!-- Theme tokens applied synchronously to prevent FOUC -->
+  <script>
+    (function () {
+      var r = document.documentElement;
+      r.setAttribute('data-mood',   'champagne');
+      r.setAttribute('data-voice',  'editorial');
+      r.setAttribute('data-rhythm', 'standard');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- Header                                                       -->
+  <!-- ============================================================ -->
+  <header class="site" id="siteHeader">
+    <a class="logo" data-route="top" href="#top">
+      <img class="logo-img" src="images/logo.png" alt="OenoAI" />
+    </a>
+
+    <nav class="primary">
+      <div class="nav-links">
+        <a class="nav-link" data-route="top"        href="#top"        data-content-key="nav.top"></a>
+        <a class="nav-link" data-route="philosophy" href="#philosophy" data-content-key="nav.philosophy"></a>
+        <a class="nav-link" data-route="products"   href="#products"   data-content-key="nav.products"></a>
+        <a class="nav-link" data-route="contact"    href="#contact"    data-content-key="nav.contact"></a>
+        <a class="nav-link" data-route="company"    href="#company"    data-content-key="nav.company"></a>
+      </div>
+      <div class="lang-toggle" role="tablist" aria-label="Language">
+        <button data-set-lang="ja" class="active"><span>JA</span></button>
+        <button data-set-lang="en"><span>EN</span></button>
+      </div>
+      <button class="menu-btn" aria-label="Menu" id="menuBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- Mobile menu                                                  -->
+  <!-- ============================================================ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a data-route="top"        href="#top">       <span data-content-key="nav.top"></span>       <span class="num">01</span></a>
+    <a data-route="philosophy" href="#philosophy"><span data-content-key="nav.philosophy"></span><span class="num">02</span></a>
+    <a data-route="products"   href="#products">  <span data-content-key="nav.products"></span>  <span class="num">03</span></a>
+    <a data-route="contact"    href="#contact">   <span data-content-key="nav.contact"></span>   <span class="num">04</span></a>
+    <a data-route="company"    href="#company">   <span data-content-key="nav.company"></span>   <span class="num">05</span></a>
+  </div>
+
+  <main class="app">
+
+    <!-- ============================================================ -->
+    <!-- 01 · Top                                                     -->
+    <!-- ============================================================ -->
+    <div class="page active" id="page-top" data-screen-label="01 Top">
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-bg" role="img" aria-label="hero background placeholder">
+          <img class="bg-image" data-src="images/hero.png" alt="" />
+        </div>
+        <div class="hero-placeholder-label">
+          [ HERO IMAGE PLACEHOLDER ]<br/>
+          VINEYARD · DUSK · LOW LIGHT · WIDE FRAME
+        </div>
+        <div class="hero-content">
+          <div class="hero-eyebrow reveal" data-content-key="ext.hero_eyebrow"></div>
+          <h1 class="reveal reveal-slow" data-content-key="hero.catchcopy"></h1>
+          <div class="cta-row reveal">
+            <a class="btn ghost-light" data-route="philosophy" href="#philosophy">
+              <span data-content-key="hero.cta_philosophy"></span>
+              <span class="arrow"></span>
+            </a>
+            <a class="btn ghost-light" data-route="contact" href="#contact">
+              <span data-content-key="hero.cta_contact"></span>
+              <span class="arrow"></span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-meta" data-content-key="ext.hero_meta"></div>
+      </section>
+
+      <!-- The Gap We Close -->
+      <section class="block gap-section">
+        <div class="section-header">
+          <div class="eyebrow reveal"><span class="num">01</span> <span data-content-key="ext.gap_eyebrow"></span></div>
+          <h2 class="section-title reveal" data-content-key="gap.title"></h2>
+        </div>
+
+        <div class="gap-grid">
+          <div>
+            <div class="gap-figure reveal">
+              <span data-content-key="ext.gap_figure"></span><sup data-content-key="ext.gap_figure_unit"></sup>
+            </div>
+            <div class="gap-rule reveal-line"></div>
+          </div>
+          <div class="prose reveal" data-content-key="gap.body" data-content-format="paragraphs"></div>
+        </div>
+      </section>
+
+      <!-- Who We Serve -->
+      <section class="block">
+        <div class="section-header">
+          <div class="eyebrow reveal"><span class="num">02</span> <span data-content-key="ext.serve_eyebrow"></span></div>
+          <h2 class="section-title reveal" data-content-key="serve.title"></h2>
+        </div>
+
+        <div class="serve-grid">
+
+          <!-- Producers & Winemakers -->
+          <article class="serve-card reveal">
+            <div class="serve-img">
+              <div class="ph-stripes"></div>
+              <div class="ph-glyph">I</div>
+              <div class="ph-label">[ IMAGE ]<br/>VINEYARD · HAND · TERROIR</div>
+              <img class="bg-image" data-src="images/producer.png" alt="" />
+            </div>
+            <div class="serve-body">
+              <div class="serve-tag">I · <span data-content-key="ext.serve_eyebrow"></span></div>
+              <h3 class="serve-title" data-content-key="serve.producer.heading"></h3>
+              <div class="serve-rule"></div>
+              <div class="serve-text" data-content-key="serve.producer.body" data-content-format="paragraphs"></div>
+            </div>
+          </article>
+
+          <!-- Importers & Distributors -->
+          <article class="serve-card reveal">
+            <div class="serve-img">
+              <div class="ph-stripes"></div>
+              <div class="ph-glyph">II</div>
+              <div class="ph-label">[ IMAGE ]<br/>WAREHOUSE · CRATE · LIGHT</div>
+              <img class="bg-image" data-src="images/importer.png" alt="" />
+            </div>
+            <div class="serve-body">
+              <div class="serve-tag">II · <span data-content-key="ext.serve_eyebrow"></span></div>
+              <h3 class="serve-title" data-content-key="serve.importer.heading"></h3>
+              <div class="serve-rule"></div>
+              <div class="serve-text" data-content-key="serve.importer.body" data-content-format="paragraphs"></div>
+            </div>
+          </article>
+
+          <!-- Restaurants & Sommeliers -->
+          <article class="serve-card reveal">
+            <div class="serve-img">
+              <div class="ph-stripes"></div>
+              <div class="ph-glyph">III</div>
+              <div class="ph-label">[ IMAGE ]<br/>TABLE · CANDLE · GLASS</div>
+              <img class="bg-image" data-src="images/restaurant.png" alt="" />
+            </div>
+            <div class="serve-body">
+              <div class="serve-tag">III · <span data-content-key="ext.serve_eyebrow"></span></div>
+              <h3 class="serve-title" data-content-key="serve.restaurant.heading"></h3>
+              <div class="serve-rule"></div>
+              <div class="serve-text" data-content-key="serve.restaurant.body" data-content-format="paragraphs"></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Products preview band -->
+      <section class="block products-pre">
+        <div class="products-pre-inner">
+          <div>
+            <div class="eyebrow reveal"><span class="num">03</span> <span data-content-key="ext.products_eyebrow"></span></div>
+            <h2 class="section-title reveal" style="margin-top:24px;" data-content-key="products.text"></h2>
+          </div>
+          <div class="meta reveal">
+            <div class="row"><span data-content-key="ext.products_meta_status[0]"></span>   <span class="val" data-content-key="ext.products_meta_status[1]"></span></div>
+            <div class="row"><span data-content-key="ext.products_meta_preview[0]"></span>  <span class="val" data-content-key="ext.products_meta_preview[1]"></span></div>
+            <div class="row"><span data-content-key="ext.products_meta_sector[0]"></span>   <span class="val" data-content-key="ext.products_meta_sector[1]"></span></div>
+            <div class="row last">
+              <span data-content-key="ext.products_meta_inquiries[0]"></span>
+              <span class="val"><a data-route="contact" href="#contact" data-content-key="ext.products_meta_inquiries[1]"></a></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA strip -->
+      <section class="block cta-strip">
+        <h2 class="section-title reveal" data-content-key="ext.cta_title"></h2>
+        <div class="cta-row reveal">
+          <a class="btn solid" data-route="philosophy" href="#philosophy">
+            <span data-content-key="cta.philosophy"></span>
+            <span class="arrow"></span>
+          </a>
+          <a class="btn ghost-dark" data-route="contact" href="#contact">
+            <span data-content-key="cta.contact"></span>
+            <span class="arrow"></span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 02 · Philosophy                                              -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-philosophy" data-screen-label="02 Philosophy">
+      <div class="philosophy-wrap">
+        <div class="philosophy-eyebrow reveal">
+          <span class="num">02</span>
+          <span data-content-key="philosophy.page_title"></span>
+        </div>
+
+        <section class="philosophy-section philosophy-story">
+          <div class="philosophy-label reveal" data-content-key="philosophy.story_label"></div>
+          <p class="philosophy-opening reveal lang-body" data-content-key="philosophy.story_opening"></p>
+          <div class="philosophy-body prose lang-body reveal"
+               data-content-list-key="philosophy.story_body"
+               data-content-list-tag="p"></div>
+        </section>
+
+        <div class="philosophy-divider reveal" aria-hidden="true"></div>
+
+        <section class="philosophy-section philosophy-credo">
+          <div class="philosophy-label reveal" data-content-key="philosophy.philosophy_label"></div>
+          <div class="philosophy-statement lang-body reveal"
+               data-content-list-key="philosophy.philosophy_body"
+               data-content-list-tag="p"></div>
+        </section>
+
+        <div class="philosophy-cta reveal">
+          <a class="btn ghost-dark" data-route="contact" href="#contact">
+            <span data-content-key="cta.contact"></span>
+            <span class="arrow"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 03 · Products (Coming Soon)                                  -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-products" data-screen-label="03 Products">
+      <div class="coming">
+        <div class="seal">III</div>
+        <h1 data-content-key="products.text"></h1>
+        <div class="sub">— Page 03 / Products —</div>
+        <a class="btn ghost-dark back" data-route="top" href="#top">
+          <span data-content-key="ext.back_to_top"></span>
+          <span class="arrow"></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 04 · Contact                                                 -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-contact" data-screen-label="04 Contact">
+      <div class="contact-wrap">
+        <div class="contact-intro">
+          <div class="eyebrow reveal"><span class="num">04</span> <span data-content-key="ext.contact_eyebrow"></span></div>
+          <h1 class="reveal" style="margin-top:24px;" data-content-key="contact.heading"></h1>
+          <div class="contact-meta reveal">
+            <span class="label">— <span data-content-key="ext.contact_hours_label"></span></span>
+            <span class="val" data-content-key="ext.contact_hours_val"></span><br/>
+            <span class="label">— <span data-content-key="ext.contact_based_label"></span></span>
+            <span class="val" data-content-key="ext.contact_based_val"></span>
+          </div>
+        </div>
+
+        <form class="contact reveal" novalidate>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.name"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <input type="text" name="name" required />
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.company"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <input type="text" name="company" required />
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.email"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <input type="email" name="email" required />
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.category"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <select name="category"
+                    required
+                    data-content-list-key="contact.category_options"
+                    data-content-list-tag="option"
+                    data-placeholder-key="ext.contact_category_placeholder">
+              <option value="" data-content-list-preserve></option>
+            </select>
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.message"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <textarea name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn ghost-dark submit">
+            <span data-content-key="contact.submit"></span>
+            <span class="arrow"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 05 · Company                                                 -->
+    <!-- ============================================================ -->
+    <div class="page" id="page-company" data-screen-label="05 Company">
+      <div class="company-wrap">
+        <div class="company-intro">
+          <div>
+            <div class="eyebrow reveal" style="margin-bottom:32px;"><span class="num">05</span> <span data-content-key="ext.company_eyebrow"></span></div>
+            <div class="eyebrow-stack reveal" data-content-key="company.tagline_top"></div>
+          </div>
+          <h1 class="reveal" data-content-key="company.tagline_sub"></h1>
+        </div>
+
+        <div class="info-table reveal">
+          <div class="key" data-content-key="company.table.company[0]"></div>
+          <div class="val" data-content-key="company.table.company[1]"></div>
+
+          <div class="key" data-content-key="company.table.representative[0]"></div>
+          <div class="val" data-content-key="company.table.representative[1]"></div>
+
+          <div class="key cont" aria-hidden="true"></div>
+          <div class="val cont bio" data-content-key="company.table.representative_bio"></div>
+
+          <div class="key" data-content-key="company.table.business_label"></div>
+          <div class="val" data-content-key="company.table.business_items[0]"></div>
+
+          <div class="key cont" aria-hidden="true"></div>
+          <div class="val cont" data-content-key="company.table.business_items[1]"></div>
+
+          <div class="key cont" aria-hidden="true"></div>
+          <div class="val cont" data-content-key="company.table.business_items[2]"></div>
+
+          <div class="key cont" aria-hidden="true"></div>
+          <div class="val cont" data-content-key="company.table.business_items[3]"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- Footer                                                       -->
+  <!-- ============================================================ -->
+  <footer class="site">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="logo" data-route="top" href="#top">
+          <img class="logo-img logo-img--footer" src="images/logo.png" alt="OenoAI" />
+        </a>
+        <p class="tag" data-content-key="hero.catchcopy"></p>
+      </div>
+      <div class="footer-col">
+        <h4 data-content-key="ext.footer_navigate"></h4>
+        <a data-route="top"        href="#top"        data-content-key="nav.top"></a>
+        <a data-route="philosophy" href="#philosophy" data-content-key="nav.philosophy"></a>
+        <a data-route="products"   href="#products"   data-content-key="nav.products"></a>
+      </div>
+      <div class="footer-col">
+        <h4 data-content-key="ext.footer_connect"></h4>
+        <a data-route="contact" href="#contact" data-content-key="nav.contact"></a>
+        <a data-route="company" href="#company" data-content-key="nav.company"></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div data-content-key="footer.copyright"></div>
+      <div data-content-key="ext.footer_location"></div>
+    </div>
+  </footer>
+
+</body>
+</html>
