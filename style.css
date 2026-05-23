@@ -1409,7 +1409,10 @@ footer.site{
 .company-hero-bg{
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.55) 100%),
+    /* left-side darkener so the eyebrow + tagline_top read cleanly */
+    linear-gradient(90deg, rgba(20,12,8,.78) 0%, rgba(20,12,8,.45) 35%, rgba(20,12,8,.25) 60%, rgba(20,12,8,.55) 100%),
+    /* warm vignette + top-to-bottom legibility wash, tuned warm to match the wood + wine palette */
+    linear-gradient(180deg, rgba(28,18,12,.35) 0%, rgba(28,18,12,.15) 45%, rgba(20,12,8,.55) 100%),
     url('images/company-bg.png') center / cover no-repeat,
     radial-gradient(ellipse at 30% 30%, #3a2a20 0%, #1f1612 55%, #0e0a08 100%);
   z-index: -1;
@@ -1431,9 +1434,9 @@ footer.site{
   gap: clamp(40px, 6vw, 100px);
   align-items: end;
 }
-.company-hero .eyebrow{ color: rgba(255,255,255,.65); }
-.company-hero .eyebrow .num{ color: var(--color-gold); }
-.company-hero .eyebrow::after{ background: rgba(255,255,255,.18); }
+.company-hero .eyebrow{ color: rgba(255,255,255,.78); }
+.company-hero .eyebrow .num{ color: var(--color-gold-soft); }
+.company-hero .eyebrow::after{ background: rgba(217,195,154,.35); }
 .company-hero .eyebrow-stack{
   font-family: var(--serif-en);
   font-style: italic;
@@ -1441,13 +1444,15 @@ footer.site{
   line-height: 1.1;
   letter-spacing: .005em;
   color: var(--color-gold-soft);
+  text-shadow: 0 1px 18px rgba(0,0,0,.45);
 }
 .company-hero h1{
   font-weight: 400;
   margin: 0;
   text-wrap: pretty;
   white-space: pre-line;  /* honour \n breaks in company.tagline_sub */
-  color: var(--color-white);
+  color: #FBF6EC;          /* warm off-white, sits with the wood tones */
+  text-shadow: 0 1px 24px rgba(0,0,0,.55);
 }
 :root[data-lang="ja"] .company-hero h1{
   font-family: var(--serif-jp);
@@ -1469,3 +1474,43 @@ footer.site{
 /* Also honour the explicit line break in the JA hero catchcopy
    (the renderer inserts <br>, but pre-line is a safe belt-and-braces) */
 .hero h1{ white-space: pre-line; }
+
+
+/* ============================================================
+ * Social link (note) inside the company info table
+ * Sits in a continuation row directly under the representative bio.
+ * ============================================================ */
+.info-table .val.social{
+  padding-top: 8px;
+  padding-bottom: 24px;
+}
+.social-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-subtext);
+  transition: color .25s var(--ease), transform .25s var(--ease);
+}
+.social-link .social-icon{
+  width: 32px; height: 32px;
+  display: block;
+  flex: none;
+  transition: transform .25s var(--ease), filter .25s var(--ease);
+}
+.social-link .social-icon rect{
+  fill: #2C2C2C;
+  transition: fill .25s var(--ease);
+}
+.social-link .social-label{
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--color-subtext);
+  transition: color .25s var(--ease);
+}
+.social-link:hover{ transform: translateX(2px); }
+.social-link:hover .social-icon rect{ fill: var(--color-gold-deep); }
+.social-link:hover .social-label{ color: var(--color-text); }
+.social-link:focus-visible{ outline: 2px solid var(--color-gold); outline-offset: 4px; border-radius: 4px; }
