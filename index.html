@@ -15,20 +15,13 @@
   <script src="content.js" defer></script>
   <script src="script.js" defer></script>
 
-  <!-- Tweakable theme defaults — applied synchronously to prevent FOUC.
-       The EDITMODE block is rewritten on disk when the user changes a tweak. -->
+  <!-- Theme tokens applied synchronously to prevent FOUC -->
   <script>
-    window.__OENO_TWEAKS_DEFAULTS = /*EDITMODE-BEGIN*/{
-      "mood": "champagne",
-      "voice": "editorial",
-      "rhythm": "compact"
-    }/*EDITMODE-END*/;
-    (function(){
-      var T = window.__OENO_TWEAKS_DEFAULTS;
+    (function () {
       var r = document.documentElement;
-      r.setAttribute('data-mood',   T.mood);
-      r.setAttribute('data-voice',  T.voice);
-      r.setAttribute('data-rhythm', T.rhythm);
+      r.setAttribute('data-mood',   'champagne');
+      r.setAttribute('data-voice',  'editorial');
+      r.setAttribute('data-rhythm', 'standard');
     })();
   </script>
 </head>
@@ -282,98 +275,53 @@
           </div>
         </div>
 
-        <div id="contact-form">
-          <form class="contact reveal" action="https://formspree.io/f/meedakqy" method="POST" novalidate>
-            <div class="field">
-              <label>
-                <span data-content-key="contact.name"></span>
-                <span class="req" data-content-key="ext.contact_required"></span>
-              </label>
-              <input type="text" name="name" required />
-            </div>
-            <div class="field">
-              <label>
-                <span data-content-key="contact.company"></span>
-                <span class="req" data-content-key="ext.contact_required"></span>
-              </label>
-              <input type="text" name="company" required />
-            </div>
-            <div class="field">
-              <label>
-                <span data-content-key="contact.email"></span>
-                <span class="req" data-content-key="ext.contact_required"></span>
-              </label>
-              <input type="email" name="email" required />
-            </div>
-            <div class="field">
-              <label>
-                <span data-content-key="contact.category"></span>
-                <span class="req" data-content-key="ext.contact_required"></span>
-              </label>
-              <select name="category"
-                      required
-                      data-content-list-key="contact.category_options"
-                      data-content-list-tag="option"
-                      data-placeholder-key="ext.contact_category_placeholder">
-                <option value="" data-content-list-preserve></option>
-              </select>
-            </div>
-            <div class="field">
-              <label>
-                <span data-content-key="contact.message"></span>
-                <span class="req" data-content-key="ext.contact_required"></span>
-              </label>
-              <textarea name="message" required></textarea>
-            </div>
-            <!-- Spam honeypot (must remain empty) -->
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
-            <button type="submit" class="btn ghost-dark submit">
-              <span data-content-key="contact.submit"></span>
-              <span class="arrow"></span>
-            </button>
-          </form>
-        </div>
-
-        <div id="contact-thanks" class="contact-thanks reveal" style="display:none;">
-          <p class="thanks-ja">お問い合わせありがとうございます。<br>内容を確認の上、担当者よりご連絡いたします。</p>
-          <p class="thanks-en">Thank you for reaching out.<br>We will get back to you shortly.</p>
-        </div>
-
-        <script>
-          (function () {
-            var form = document.querySelector('#contact-form form');
-            if (!form) return;
-            // Intercept in the capture phase + stop other handlers so the
-            // visual-stub submit handler in script.js does not also fire.
-            form.addEventListener('submit', function (e) {
-              e.preventDefault();
-              e.stopImmediatePropagation();
-
-              var formEl   = e.currentTarget;
-              var wrap     = document.getElementById('contact-form');
-              var thanks   = document.getElementById('contact-thanks');
-              var submitBtn = formEl.querySelector('button[type="submit"]');
-              if (submitBtn) submitBtn.disabled = true;
-
-              fetch(formEl.action, {
-                method: 'POST',
-                body: new FormData(formEl),
-                headers: { 'Accept': 'application/json' }
-              }).then(function (response) {
-                if (response.ok) {
-                  if (wrap)   wrap.style.display = 'none';
-                  if (thanks) thanks.style.display = 'block';
-                } else {
-                  if (submitBtn) submitBtn.disabled = false;
-                  alert('Sorry, there was a problem submitting your form. / 送信に失敗しました。');
-                }
-              }).catch(function () {
-                if (submitBtn) submitBtn.disabled = false;
-                alert('Sorry, there was a problem submitting your form. / 送信に失敗しました。');
-              });
-            }, true);
-          })();
-        </script>
+        <form class="contact reveal" novalidate>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.name"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <input type="text" name="name" required />
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.company"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <input type="text" name="company" required />
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.email"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <input type="email" name="email" required />
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.category"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <select name="category"
+                    required
+                    data-content-list-key="contact.category_options"
+                    data-content-list-tag="option"
+                    data-placeholder-key="ext.contact_category_placeholder">
+              <option value="" data-content-list-preserve></option>
+            </select>
+          </div>
+          <div class="field">
+            <label>
+              <span data-content-key="contact.message"></span>
+              <span class="req" data-content-key="ext.contact_required"></span>
+            </label>
+            <textarea name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn ghost-dark submit">
+            <span data-content-key="contact.submit"></span>
+            <span class="arrow"></span>
+          </button>
+        </form>
       </div>
     </div>
 
@@ -461,16 +409,6 @@
       <div data-content-key="ext.footer_location"></div>
     </div>
   </footer>
-
-  <!-- ============================================================ -->
-  <!-- Tweaks panel (React + Babel)                                 -->
-  <!-- ============================================================ -->
-  <div id="tweaks-root"></div>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
-  <script type="text/babel" src="tweaks.jsx"></script>
 
 </body>
 </html>
