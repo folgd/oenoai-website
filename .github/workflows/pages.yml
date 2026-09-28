@@ -1,0 +1,54 @@
+# 公開前のチェックと公開（GitHub Pages）
+#
+# main に push（GitHub の画面からのアップロードも含む）するたびに、問い合わせフォームが正しい形かを確かめ、
+# **通ったときだけ** www.oenoai.jp に公開する。通らなければ公開せず、GitHub からメールで知らせる（前の版が出たまま）。
+# チェックの中身は .github/scripts/check-site.mjs。
+#
+# 使うには、Settings → Pages → Build and deployment → Source を「GitHub Actions」にしておくこと
+# （「Deploy from a branch」のままだと、チェックに関係なく main がそのまま公開される）。
+# .github/ はアップロードで上書きされない（Claude Design から書き出すファイルに含まれない）ので、消えない。
+name: 公開前のチェックと公開
+
+on:
+  push:
+    branches: [main]
+  # Actions の画面から、手で公開し直すこともできる。
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 続けて push されたときは、後のものを待たせる（公開の途中で止めない）。
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: 問い合わせフォームのチェック
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: node .github/scripts/check-site.mjs
+
+  deploy:
+    name: 公開
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/configure-pages@v5
+      # サイトのファイルをそのまま公開する（ビルドは無い。.git・.github は含めない）。
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
