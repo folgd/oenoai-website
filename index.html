@@ -275,53 +275,110 @@
           </div>
         </div>
 
-        <form class="contact reveal" novalidate>
-          <div class="field">
-            <label>
-              <span data-content-key="contact.name"></span>
-              <span class="req" data-content-key="ext.contact_required"></span>
-            </label>
-            <input type="text" name="name" required />
-          </div>
-          <div class="field">
-            <label>
-              <span data-content-key="contact.company"></span>
-              <span class="req" data-content-key="ext.contact_required"></span>
-            </label>
-            <input type="text" name="company" required />
-          </div>
-          <div class="field">
-            <label>
-              <span data-content-key="contact.email"></span>
-              <span class="req" data-content-key="ext.contact_required"></span>
-            </label>
-            <input type="email" name="email" required />
-          </div>
-          <div class="field">
-            <label>
-              <span data-content-key="contact.category"></span>
-              <span class="req" data-content-key="ext.contact_required"></span>
-            </label>
-            <select name="category"
-                    required
-                    data-content-list-key="contact.category_options"
-                    data-content-list-tag="option"
-                    data-placeholder-key="ext.contact_category_placeholder">
-              <option value="" data-content-list-preserve></option>
-            </select>
-          </div>
-          <div class="field">
-            <label>
-              <span data-content-key="contact.message"></span>
-              <span class="req" data-content-key="ext.contact_required"></span>
-            </label>
-            <textarea name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn ghost-dark submit">
-            <span data-content-key="contact.submit"></span>
-            <span class="arrow"></span>
-          </button>
-        </form>
+        <!--
+          問い合わせフォーム：送信先は Formspree（https://formspree.io/f/meedakqy）。受け取り先のメールは Formspree の管理画面で設定する。
+          ※ デザインを作り直してアップロードするときも、このブロック（action・_gotcha・_subject・下の <script>）を消さないこと。
+             2026-09-28 のアップロードで消え、フォームが見た目だけになっていた。
+        -->
+        <div id="contact-form">
+          <form class="contact reveal" action="https://formspree.io/f/meedakqy" method="POST" novalidate>
+            <!-- 迷惑送信の対策：人には見えない欄。ボットだけが記入するので、記入があれば Formspree が捨てる -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                   style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;" />
+            <input type="hidden" name="_subject" value="OenoAI サイトからのお問い合わせ" />
+            <div class="field">
+              <label>
+                <span data-content-key="contact.name"></span>
+                <span class="req" data-content-key="ext.contact_required"></span>
+              </label>
+              <input type="text" name="name" required maxlength="100" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label>
+                <span data-content-key="contact.company"></span>
+                <span class="req" data-content-key="ext.contact_required"></span>
+              </label>
+              <input type="text" name="company" required maxlength="100" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label>
+                <span data-content-key="contact.email"></span>
+                <span class="req" data-content-key="ext.contact_required"></span>
+              </label>
+              <input type="email" name="email" required maxlength="254" autocomplete="email" />
+            </div>
+            <div class="field">
+              <label>
+                <span data-content-key="contact.category"></span>
+                <span class="req" data-content-key="ext.contact_required"></span>
+              </label>
+              <select name="category"
+                      required
+                      data-content-list-key="contact.category_options"
+                      data-content-list-tag="option"
+                      data-placeholder-key="ext.contact_category_placeholder">
+                <option value="" data-content-list-preserve></option>
+              </select>
+            </div>
+            <div class="field">
+              <label>
+                <span data-content-key="contact.message"></span>
+                <span class="req" data-content-key="ext.contact_required"></span>
+              </label>
+              <textarea name="message" required maxlength="3000"></textarea>
+            </div>
+            <button type="submit" class="btn ghost-dark submit">
+              <span data-content-key="contact.submit"></span>
+              <span class="arrow"></span>
+            </button>
+          </form>
+        </div>
+
+        <div id="contact-thanks" class="contact-thanks" style="display:none;" role="status">
+          <p class="thanks-ja">お問い合わせありがとうございます。<br>内容を確認の上、担当者よりご連絡いたします。</p>
+          <p class="thanks-en">Thank you for reaching out.<br>We will get back to you shortly.</p>
+        </div>
+
+        <script>
+          (function () {
+            var form = document.querySelector('#contact-form form');
+            if (!form) return;
+            // 送信を Formspree に送る。script.js の見た目だけの送信処理が一緒に動かないよう、先に受け取って止める。
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+
+              var formEl = e.currentTarget;
+              // 必須の欄が空・メールの形が違うときは、ブラウザの案内を出して送らない（novalidate のため自分で確かめる）。
+              if (!formEl.checkValidity()) {
+                formEl.reportValidity();
+                return;
+              }
+
+              var wrap = document.getElementById('contact-form');
+              var thanks = document.getElementById('contact-thanks');
+              var submitBtn = formEl.querySelector('button[type="submit"]');
+              if (submitBtn) submitBtn.disabled = true;
+
+              fetch(formEl.action, {
+                method: 'POST',
+                body: new FormData(formEl),
+                headers: { Accept: 'application/json' }
+              }).then(function (response) {
+                if (response.ok) {
+                  if (wrap) wrap.style.display = 'none';
+                  if (thanks) thanks.style.display = 'block';
+                } else {
+                  if (submitBtn) submitBtn.disabled = false;
+                  alert('送信に失敗しました。時間をおいてもう一度お試しください。 / Sorry, there was a problem submitting your form.');
+                }
+              }).catch(function () {
+                if (submitBtn) submitBtn.disabled = false;
+                alert('送信に失敗しました。時間をおいてもう一度お試しください。 / Sorry, there was a problem submitting your form.');
+              });
+            }, true);
+          })();
+        </script>
       </div>
     </div>
 
